@@ -1,8 +1,10 @@
-const express = require('express')
+const express = require('express');
+const {iterativo, recursivo} = require('./produtorioService.js');
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
+
 
 app.get("/api/v1/", (req, res) => {
     let m = parseInt(req.query.initial)
@@ -27,25 +29,7 @@ app.get("/api/v1/", (req, res) => {
     }
 })
 
-function iterativo(m, n) {
-    let result = 1;
 
-    for (let i = m; i <= n; i++) {
-        result *= (i + (1 / i))
-    }
-
-    return result
-}
-
-function recursivo(m, n, value) {
-    if (m <= n) {
-        value *= (m + (1 / m))
-        m++
-        return recursivo(m, n, value)
-    }
-
-    return value
-}
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080: http://localhost:8080")
